@@ -4,6 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <meta name="theme-color" content="#D62B1F">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9EZ3Z42T07"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-9EZ3Z42T07');
+</script>
 <title>Грузоперевозки Кишинёв — Relocare.MD</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@700;900&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -150,7 +158,7 @@ body{font-family:'Manrope',sans-serif;background:var(--bg);color:var(--ink);font
 <!-- HEADER -->
 <header class="hdr">
   <a href="https://relocare.md" class="logo">Relocare<em>.MD</em></a>
-  <a href="tel:+37360773883" class="hdr-phone">📞 060-773-883</a>
+  <a href="tel:+37360773883" class="hdr-phone" onclick="if(typeof gtag==='function'){gtag('event','click_phone',{'event_category':'contact','event_label':'header_phone'});}">📞 060-773-883</a>
 </header>
 
 <!-- ALERT -->
@@ -401,7 +409,7 @@ body{font-family:'Manrope',sans-serif;background:var(--bg);color:var(--ink);font
 
   <!-- OR CALL -->
   <div style="text-align:center;margin:4px 0 14px;font-size:13px;color:var(--ink3)" id="orCallTxt">или позвоните прямо сейчас:</div>
-  <a href="tel:+37360773883" id="bigCallBtn" style="display:flex;align-items:center;justify-content:center;gap:10px;background:var(--ink);border-radius:var(--rs);padding:15px;color:#fff;text-decoration:none;font-family:'Exo 2',sans-serif;font-size:18px;font-weight:900;letter-spacing:-.3px;margin-bottom:16px">
+  <a href="tel:+37360773883" id="bigCallBtn" onclick="if(typeof gtag==='function'){gtag('event','click_phone',{'event_category':'contact','event_label':'big_call_button'});}" style="display:flex;align-items:center;justify-content:center;gap:10px;background:var(--ink);border-radius:var(--rs);padding:15px;color:#fff;text-decoration:none;font-family:'Exo 2',sans-serif;font-size:18px;font-weight:900;letter-spacing:-.3px;margin-bottom:16px">
     📞 060-773-883
   </a>
 
@@ -410,7 +418,7 @@ body{font-family:'Manrope',sans-serif;background:var(--bg);color:var(--ink);font
     <div class="ok-circle">✓</div>
     <h2>Заявка принята!</h2>
     <p>Оператор перезвонит вам в течение <strong style="color:var(--red)">5 минут</strong> и рассчитает точную стоимость вашей перевозки.</p>
-    <a href="tel:+37360773883" class="call-link">📞 060-773-883</a>
+    <a href="tel:+37360773883" class="call-link" onclick="if(typeof gtag==='function'){gtag('event','click_phone',{'event_category':'contact','event_label':'success_call_link'});}">📞 060-773-883</a>
     <p style="font-size:12px;color:var(--ink3);margin-top:14px">Или дождитесь звонка · Пн–Вс 08:00–21:00</p>
   </div>
 
@@ -591,7 +599,16 @@ ${extras.length ? '➕ *Доп. услуги:* ' + extras.join(', ') + '\n' : ''
       text: msg,
       parse_mode: 'Markdown'
     })
-  }).catch(()=>{}); // silent fail — не блокирует UI
+}).catch(()=>{}); // silent fail — не блокирует UI
+
+  // Google Analytics - Lead Event
+  if (typeof gtag === 'function') {
+    gtag('event', 'lead', {
+      'event_category': 'form',
+      'event_label': 'form_submit',
+      'value': lead.priceFrom
+    });
+  }
 
   document.getElementById('formWrap').style.display='none';
   document.getElementById('orCallTxt').style.display='none';
