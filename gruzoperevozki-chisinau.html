@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="theme-color" content="#D62B1F">
+<title>Грузоперевозки Кишинёв — Relocare.MD</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@700;900&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --red:#D62B1F;
+  --red2:#B82218;
+  --green:#1AAE68;
+  --ink:#18160F;
+  --ink2:#3C3830;
+  --ink3:#8A8680;
+  --bg:#F6F4EF;
+  --white:#FFFFFF;
+  --border:#E0DDD6;
+  --r:14px;
+  --rs:9px;
+}
+html,body{height:100%;overflow-x:hidden}
+body{font-family:'Manrope',sans-serif;background:var(--bg);color:var(--ink);font-size:15px;line-height:1.5;-webkit-tap-highlight-color:transparent}
+
+/* ─── HEADER ─── */
+.hdr{background:var(--ink);display:flex;align-items:center;justify-content:space-between;padding:0 16px;height:54px;position:sticky;top:0;z-index:100}
+.logo{font-family:'Exo 2',sans-serif;font-size:17px;font-weight:900;color:#fff;text-decoration:none;letter-spacing:-.3px}
+.logo em{color:var(--red);font-style:normal}
+.hdr-phone{display:flex;align-items:center;gap:6px;background:var(--red);border-radius:8px;padding:7px 12px;color:#fff;text-decoration:none;font-family:'Exo 2',sans-serif;font-size:14px;font-weight:900;letter-spacing:-.2px;white-space:nowrap}
+
+/* ─── ALERT ─── */
+.alert{background:var(--red);color:#fff;text-align:center;padding:9px 16px;font-size:13px;font-weight:600;line-height:1.4}
+.alert strong{font-weight:800}
+.blink{display:inline-block;animation:bl 1.3s step-end infinite}
+@keyframes bl{0%,100%{opacity:1}50%{opacity:.25}}
+
+/* ─── PAGE ─── */
+.page{max-width:480px;margin:0 auto;padding:20px 16px 100px}
+
+/* ─── SECTION TITLE ─── */
+.stitle{font-family:'Exo 2',sans-serif;font-size:22px;font-weight:900;letter-spacing:-.4px;margin-bottom:4px;line-height:1.15}
+.stitle em{font-style:normal;color:var(--red)}
+.sdesc{font-size:13px;color:var(--ink3);margin-bottom:20px;line-height:1.55}
+
+/* ─── CARD ─── */
+.card{background:var(--white);border:1px solid var(--border);border-radius:var(--r);margin-bottom:14px;overflow:hidden}
+.card-head{background:var(--ink);padding:13px 16px;display:flex;align-items:center;gap:10px}
+.step-badge{width:24px;height:24px;background:var(--red);border-radius:50%;font-family:'Exo 2',sans-serif;font-size:12px;font-weight:900;color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.card-title{font-family:'Exo 2',sans-serif;font-size:14px;font-weight:800;color:#fff;letter-spacing:-.2px}
+.card-body{padding:14px 16px}
+
+/* ─── OPTION BUTTONS ─── */
+.opt-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.opt-btn{background:var(--bg);border:2px solid var(--border);border-radius:var(--rs);padding:12px 10px;cursor:pointer;text-align:center;transition:all .15s;-webkit-tap-highlight-color:transparent;position:relative;user-select:none}
+.opt-btn:active{transform:scale(.97)}
+.opt-btn.on{background:#fff3f2;border-color:var(--red)}
+.opt-btn.on::after{content:'✓';position:absolute;top:6px;right:8px;font-size:10px;font-weight:900;color:var(--red)}
+.opt-icon{font-size:24px;display:block;margin-bottom:4px}
+.opt-label{font-size:12px;font-weight:700;color:var(--ink);display:block;line-height:1.3}
+.opt-sub{font-size:11px;color:var(--ink3);display:block;margin-top:2px}
+
+/* ─── ROUTE ─── */
+.route-wrap{display:grid;grid-template-columns:1fr 24px 1fr;gap:8px;align-items:center;margin-bottom:10px}
+.route-arrow{text-align:center;font-size:16px;color:var(--ink3);font-weight:700}
+.sel{width:100%;background:var(--bg);border:2px solid var(--border);border-radius:var(--rs);padding:11px 10px;font-family:'Manrope',sans-serif;font-size:14px;font-weight:600;color:var(--ink);cursor:pointer;-webkit-appearance:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%238A8680' stroke-width='1.8' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;padding-right:28px}
+.sel:focus{outline:none;border-color:var(--red)}
+.dist-pill{background:#f0fdf7;border:1.5px solid rgba(26,174,104,.25);border-radius:var(--rs);padding:9px 12px;font-size:13px;color:var(--green);font-weight:600;display:flex;align-items:center;gap:7px}
+.dist-pill strong{font-family:'Exo 2',sans-serif;font-size:14px}
+
+/* ─── EXTRAS ─── */
+.extra-item{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid var(--border);cursor:pointer;user-select:none;-webkit-tap-highlight-color:transparent}
+.extra-item:last-child{border-bottom:none;padding-bottom:0}
+.extra-item:active{opacity:.7}
+.chk{width:22px;height:22px;min-width:22px;border:2px solid var(--border);border-radius:5px;display:flex;align-items:center;justify-content:center;transition:all .15s;font-size:12px;color:transparent;font-weight:900}
+.extra-item.on .chk{background:var(--red);border-color:var(--red);color:#fff}
+.extra-txt{flex:1}
+.extra-name{font-size:13px;font-weight:700;display:block;color:var(--ink)}
+.extra-detail{font-size:11px;color:var(--ink3);margin-top:1px}
+.extra-cost{font-family:'Exo 2',sans-serif;font-size:13px;font-weight:900;color:var(--green);white-space:nowrap}
+
+/* ─── PRICE RESULT ─── */
+.price-card{background:var(--ink);border-radius:var(--r);padding:18px 16px;margin-bottom:14px}
+.price-from-row{display:flex;flex-direction:column;align-items:center;text-align:center;padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,.1);margin-bottom:14px}
+.price-from-label{font-size:11px;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.6px;margin-bottom:6px}
+.price-from-val{font-family:'Exo 2',sans-serif;font-size:42px;font-weight:900;color:#fff;line-height:1;letter-spacing:-1.5px}
+.price-from-unit{font-size:16px;color:rgba(255,255,255,.5);font-weight:700}
+.price-from-sub{font-size:12px;color:rgba(255,255,255,.4);margin-top:6px}
+.price-notice{display:flex;gap:10px;align-items:flex-start;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:12px 13px;font-size:12px;color:rgba(255,255,255,.6);line-height:1.6}
+.notice-icon{font-size:16px;flex-shrink:0;margin-top:1px}
+.price-notice strong{color:rgba(255,255,255,.9);font-weight:700}
+
+/* ─── FORM ─── */
+.form-wrap{background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:16px;margin-bottom:14px}
+.form-title{font-family:'Exo 2',sans-serif;font-size:16px;font-weight:900;margin-bottom:4px;letter-spacing:-.3px}
+.form-sub{font-size:12px;color:var(--ink3);margin-bottom:14px}
+.inp{display:block;width:100%;background:var(--bg);border:2px solid var(--border);border-radius:var(--rs);padding:13px 14px;font-family:'Manrope',sans-serif;font-size:15px;color:var(--ink);transition:border-color .2s;margin-bottom:10px;-webkit-appearance:none}
+.inp:focus{outline:none;border-color:var(--red)}
+.inp.err{border-color:var(--red);background:#fff5f4}
+.inp::placeholder{color:var(--ink3)}
+.sub-btn{width:100%;background:var(--red);border:none;border-radius:var(--rs);padding:16px;font-family:'Exo 2',sans-serif;font-size:17px;font-weight:900;color:#fff;cursor:pointer;letter-spacing:-.3px;transition:background .15s;-webkit-tap-highlight-color:transparent}
+.sub-btn:active{background:var(--red2)}
+.form-note{font-size:11px;color:var(--ink3);text-align:center;margin-top:9px;line-height:1.5}
+
+/* ─── SUCCESS ─── */
+.success{display:none;text-align:center;padding:36px 16px 24px}
+.success.show{display:block}
+.ok-circle{width:70px;height:70px;background:rgba(26,174,104,.12);border:2px solid rgba(26,174,104,.3);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 18px;font-size:32px;animation:pop .4s cubic-bezier(.175,.885,.32,1.275) both}
+@keyframes pop{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}
+.success h2{font-family:'Exo 2',sans-serif;font-size:22px;font-weight:900;letter-spacing:-.4px;margin-bottom:8px}
+.success p{font-size:13px;color:var(--ink2);margin-bottom:20px;line-height:1.6}
+.call-link{display:flex;align-items:center;justify-content:center;gap:10px;background:var(--red);border-radius:var(--rs);padding:15px;color:#fff;text-decoration:none;font-family:'Exo 2',sans-serif;font-size:20px;font-weight:900;letter-spacing:-.4px;transition:background .15s}
+.call-link:active{background:var(--red2)}
+
+/* ─── TRUST ROW ─── */
+.trust-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+.trust-item{background:var(--white);border:1px solid var(--border);border-radius:var(--rs);padding:13px 12px;display:flex;flex-direction:column;gap:5px}
+.ti-icon{font-size:20px}
+.ti-label{font-size:12px;font-weight:700;color:var(--ink);line-height:1.3}
+.ti-val{font-size:11px;color:var(--ink3)}
+
+/* ─── AVAIL BANNER ─── */
+.avail-banner{background:#fff3f2;border:1.5px solid rgba(214,43,31,.25);border-radius:var(--rs);padding:12px 14px;display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.avail-num-big{font-family:'Exo 2',sans-serif;font-size:36px;font-weight:900;color:var(--red);line-height:1;flex-shrink:0}
+.avail-text-wrap strong{display:block;font-size:14px;font-weight:800;color:var(--ink);margin-bottom:2px}
+.avail-text-wrap span{font-size:12px;color:var(--ink3)}
+
+/* ─── BOTTOM CTA ─── */
+.bottom-cta{position:fixed;bottom:0;left:0;right:0;background:var(--ink);border-top:1px solid rgba(255,255,255,.08);padding:10px 16px calc(10px + env(safe-area-inset-bottom));display:flex;align-items:center;justify-content:space-between;gap:12px;z-index:99}
+.bcta-info{flex:1}
+.bcta-price{font-family:'Exo 2',sans-serif;font-size:22px;font-weight:900;color:#fff;line-height:1;letter-spacing:-.5px}
+.bcta-label{font-size:10px;color:rgba(255,255,255,.4);margin-top:1px;text-transform:uppercase;letter-spacing:.3px}
+.bcta-btn{background:var(--red);border-radius:10px;padding:12px 20px;color:#fff;text-decoration:none;font-family:'Exo 2',sans-serif;font-size:15px;font-weight:900;letter-spacing:-.2px;white-space:nowrap;transition:background .15s;border:none;cursor:pointer}
+.bcta-btn:active{background:var(--red2)}
+
+/* hide bottom cta after success */
+.hide-cta .bottom-cta{display:none}
+.hide-cta .page{padding-bottom:20px}
+
+/* animations */
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.fu{animation:fadeUp .4s ease both}
+.d1{animation-delay:.06s}.d2{animation-delay:.12s}.d3{animation-delay:.18s}.d4{animation-delay:.24s}.d5{animation-delay:.30s}.d6{animation-delay:.36s}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="hdr">
+  <a href="https://relocare.md" class="logo">Relocare<em>.MD</em></a>
+  <a href="tel:+37360773883" class="hdr-phone">📞 060-773-883</a>
+</header>
+
+<!-- ALERT -->
+<div class="alert">
+  <span class="blink">🔴</span> Осталось <strong id="alertCount">2 машины</strong> <span id="alertText">на сегодня — бронируйте сейчас!</span>
+</div>
+
+<!-- PAGE -->
+<div class="page">
+
+  <!-- Title -->
+  <div class="fu">
+    <div class="stitle">Грузоперевозки <em>по Молдове</em></div>
+    <div class="sdesc">Рассчитайте ориентировочную стоимость за 1 минуту. Точную цену скажет оператор.</div>
+  </div>
+
+  <!-- Avail -->
+  <div class="avail-banner fu d1">
+    <div class="avail-num-big" id="availNum">2</div>
+    <div class="avail-text-wrap">
+      <strong id="availTitle">Машины свободны сегодня</strong>
+      <span id="availSub">Выезд за 30–60 минут · Работаем 08:00–21:00</span>
+    </div>
+  </div>
+
+  <!-- Trust -->
+  <div class="trust-row fu d1">
+    <div class="trust-item">
+      <div class="ti-icon">⚡</div>
+      <div class="ti-label">Выезд за 30 мин</div>
+      <div class="ti-val">Ежедневно 08–21</div>
+    </div>
+    <div class="trust-item">
+      <div class="ti-icon">💰</div>
+      <div class="ti-label">Лучшая цена</div>
+      <div class="ti-val">Гарантия по Молдове</div>
+    </div>
+    <div class="trust-item">
+      <div class="ti-icon">🛡️</div>
+      <div class="ti-label">Страховка груза</div>
+      <div class="ti-val">100% защита</div>
+    </div>
+    <div class="trust-item">
+      <div class="ti-icon">⭐</div>
+      <div class="ti-label">Рейтинг 4.9/5</div>
+      <div class="ti-val">5000+ клиентов</div>
+    </div>
+  </div>
+
+  <!-- STEP 1: What -->
+  <div class="card fu d2">
+    <div class="card-head">
+      <div class="step-badge">1</div>
+      <div class="card-title">Что нужно перевезти?</div>
+    </div>
+    <div class="card-body">
+      <div class="opt-grid" id="serviceGrid">
+        <button class="opt-btn on" data-base="400" onclick="pick(this,'serviceGrid')">
+          <span class="opt-icon">🏠</span>
+          <span class="opt-label">Переезд</span>
+          <span class="opt-sub">квартира / офис</span>
+        </button>
+        <button class="opt-btn" data-base="350" onclick="pick(this,'serviceGrid')">
+          <span class="opt-icon">📦</span>
+          <span class="opt-label">Грузоперевозки</span>
+          <span class="opt-sub">любые грузы</span>
+        </button>
+        <button class="opt-btn" data-base="380" onclick="pick(this,'serviceGrid')">
+          <span class="opt-icon">🛋️</span>
+          <span class="opt-label">Мебель</span>
+          <span class="opt-sub">перевозка / подъём</span>
+        </button>
+        <button class="opt-btn" data-base="420" onclick="pick(this,'serviceGrid')">
+          <span class="opt-icon">🧱</span>
+          <span class="opt-label">Стройматериалы</span>
+          <span class="opt-sub">кирпич, плитка…</span>
+        </button>
+        <button class="opt-btn" data-base="300" onclick="pick(this,'serviceGrid')">
+          <span class="opt-icon">🗑️</span>
+          <span class="opt-label">Вывоз мусора</span>
+          <span class="opt-sub">мебели, техники</span>
+        </button>
+        <button class="opt-btn" data-base="360" onclick="pick(this,'serviceGrid')">
+          <span class="opt-icon">📋</span>
+          <span class="opt-label">Другое</span>
+          <span class="opt-sub">уточним по звонку</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 2: Truck -->
+  <div class="card fu d3">
+    <div class="card-head">
+      <div class="step-badge">2</div>
+      <div class="card-title">Какой объём груза?</div>
+    </div>
+    <div class="card-body">
+      <div class="opt-grid" id="truckGrid" style="grid-template-columns:1fr 1fr 1fr">
+        <button class="opt-btn" data-hourly="350" data-mult="1" onclick="pick(this,'truckGrid')">
+          <span class="opt-icon">🚐</span>
+          <span class="opt-label">До 1.5 т</span>
+          <span class="opt-sub">13 м³</span>
+        </button>
+        <button class="opt-btn on" data-hourly="400" data-mult="1.15" onclick="pick(this,'truckGrid')">
+          <span class="opt-icon">🚚</span>
+          <span class="opt-label">До 2.5 т</span>
+          <span class="opt-sub">20 м³</span>
+        </button>
+        <button class="opt-btn" data-hourly="600" data-mult="1.55" onclick="pick(this,'truckGrid')">
+          <span class="opt-icon">🛻</span>
+          <span class="opt-label">До 5 т</span>
+          <span class="opt-sub">36 м³</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 3: Route -->
+  <div class="card fu d4">
+    <div class="card-head">
+      <div class="step-badge">3</div>
+      <div class="card-title">Откуда и куда?</div>
+    </div>
+    <div class="card-body">
+      <div class="route-wrap">
+        <select class="sel" id="cityFrom" onchange="updateRoute()">
+          <option value="chisinau">📍 Кишинёв</option>
+          <option value="balti">Бельцы</option>
+          <option value="orhei">Орхей</option>
+          <option value="ungheni">Унгень</option>
+          <option value="cahul">Кагул</option>
+          <option value="soroca">Сороки</option>
+          <option value="comrat">Комрат</option>
+          <option value="drochia">Дрокия</option>
+          <option value="edinet">Единец</option>
+          <option value="hincesti">Хынчешты</option>
+          <option value="straseni">Стрэшень</option>
+          <option value="ialoveni">Яловень</option>
+          <option value="anenii">Анений Ной</option>
+          <option value="criuleni">Криулень</option>
+          <option value="nisporeni">Ниспорень</option>
+          <option value="floresti">Флорешть</option>
+          <option value="rezina">Резина</option>
+          <option value="telenesti">Теленешты</option>
+          <option value="glodeni">Глодень</option>
+        </select>
+        <div class="route-arrow">→</div>
+        <select class="sel" id="cityTo" onchange="updateRoute()">
+          <option value="chisinau">📍 Кишинёв</option>
+          <option value="balti">Бельцы</option>
+          <option value="orhei">Орхей</option>
+          <option value="ungheni">Унгень</option>
+          <option value="cahul">Кагул</option>
+          <option value="soroca">Сороки</option>
+          <option value="comrat">Комрат</option>
+          <option value="drochia">Дрокия</option>
+          <option value="edinet">Единец</option>
+          <option value="hincesti">Хынчешты</option>
+          <option value="straseni">Стрэшень</option>
+          <option value="ialoveni">Яловень</option>
+          <option value="anenii">Анений Ной</option>
+          <option value="criuleni">Криулень</option>
+          <option value="nisporeni">Ниспорень</option>
+          <option value="floresti">Флорешть</option>
+          <option value="rezina">Резина</option>
+          <option value="telenesti">Теленешты</option>
+          <option value="glodeni">Глодень</option>
+        </select>
+      </div>
+      <div class="dist-pill" id="distPill">
+        <span>📏</span>
+        <div id="distText">По городу Кишинёв</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 4: Extras -->
+  <div class="card fu d5">
+    <div class="card-head">
+      <div class="step-badge">4</div>
+      <div class="card-title">Нужна ли помощь? (необяз.)</div>
+    </div>
+    <div class="card-body">
+      <div class="extra-item" onclick="toggleExtra(this,200)">
+        <div class="chk"></div>
+        <div class="extra-txt">
+          <span class="extra-name">Грузчики — 2 чел.</span>
+          <span class="extra-detail">Погрузка, разгрузка, подъём на этаж</span>
+        </div>
+        <div class="extra-cost">+200 л/ч</div>
+      </div>
+      <div class="extra-item" onclick="toggleExtra(this,150)">
+        <div class="chk"></div>
+        <div class="extra-txt">
+          <span class="extra-name">Упаковка мебели</span>
+          <span class="extra-detail">Стрейч-плёнка, коробки, защита</span>
+        </div>
+        <div class="extra-cost">+150 л</div>
+      </div>
+      <div class="extra-item" onclick="toggleExtra(this,120)">
+        <div class="chk"></div>
+        <div class="extra-txt">
+          <span class="extra-name">Разборка / сборка</span>
+          <span class="extra-detail">Шкафы, кровати, диваны</span>
+        </div>
+        <div class="extra-cost">+120 л</div>
+      </div>
+      <div class="extra-item" onclick="toggleExtra(this,350)">
+        <div class="chk"></div>
+        <div class="extra-txt">
+          <span class="extra-name">🔥 Срочный выезд</span>
+          <span class="extra-detail">Машина через 30 минут</span>
+        </div>
+        <div class="extra-cost">+350 л</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRICE RESULT -->
+  <div class="price-card fu d6">
+    <div class="price-from-row">
+      <div class="price-from-label">Ориентировочно от</div>
+      <div class="price-from-val">
+        <span id="pFrom">200</span>
+        <span class="price-from-unit"> лей</span>
+      </div>
+      <div class="price-from-sub" id="pFromSub">за перевозку по городу</div>
+    </div>
+    <div class="price-notice">
+      <span class="notice-icon">💬</span>
+      <div>
+        <strong>Это приблизительная сумма.</strong> Точная цена зависит от этажа, объёма, расстояния и других деталей. Оставьте номер — оператор рассчитает всё за 2 минуты и назовёт финальную цену.
+      </div>
+    </div>
+  </div>
+
+  <!-- LEAD FORM -->
+  <div class="form-wrap fu d6" id="formWrap">
+    <div class="form-title">Узнать точную цену</div>
+    <div class="form-sub">Оператор перезвонит и рассчитает финальную стоимость — бесплатно</div>
+    <input type="text" class="inp" id="fName" placeholder="Ваше имя *" autocomplete="name" />
+    <input type="tel" class="inp" id="fPhone" placeholder="Телефон: 060-XXX-XXX *" autocomplete="tel" inputmode="tel" />
+    <input type="text" class="inp" id="fAddr" placeholder="Адрес (необязательно)" autocomplete="street-address" />
+    <button class="sub-btn" onclick="doSubmit()">Узнать точную цену →</button>
+    <p class="form-note">Нажимая, вы соглашаетесь на обработку данных. Перезвоним в течение 5 мин.</p>
+  </div>
+
+  <!-- OR CALL -->
+  <div style="text-align:center;margin:4px 0 14px;font-size:13px;color:var(--ink3)" id="orCallTxt">или позвоните прямо сейчас:</div>
+  <a href="tel:+37360773883" id="bigCallBtn" style="display:flex;align-items:center;justify-content:center;gap:10px;background:var(--ink);border-radius:var(--rs);padding:15px;color:#fff;text-decoration:none;font-family:'Exo 2',sans-serif;font-size:18px;font-weight:900;letter-spacing:-.3px;margin-bottom:16px">
+    📞 060-773-883
+  </a>
+
+  <!-- SUCCESS (hidden initially) -->
+  <div class="success" id="successBlock">
+    <div class="ok-circle">✓</div>
+    <h2>Заявка принята!</h2>
+    <p>Оператор перезвонит вам в течение <strong style="color:var(--red)">5 минут</strong> и рассчитает точную стоимость вашей перевозки.</p>
+    <a href="tel:+37360773883" class="call-link">📞 060-773-883</a>
+    <p style="font-size:12px;color:var(--ink3);margin-top:14px">Или дождитесь звонка · Пн–Вс 08:00–21:00</p>
+  </div>
+
+</div><!-- /page -->
+
+<!-- BOTTOM CTA -->
+<div class="bottom-cta" id="bottomCta">
+  <div class="bcta-info">
+    <div class="bcta-price" id="bctaPrice">de la 200 lei</div>
+    <div class="bcta-label">orientativ · prețul exact — operatorul</div>
+  </div>
+  <button class="bcta-btn" onclick="scrollToForm()">Узнать точную цену</button>
+</div>
+
+<script>
+/* ── STATE ── */
+const S={service:'move',truck:'m',distKm:0,hasExtras:false};
+
+/* ── PRICE RANGES from real price table ── */
+// Base "от X лей" per service type × truck size
+const FROM={
+  move:   {s:200, m:250, l:350},
+  cargo:  {s:200, m:250, l:350},
+  furniture:{s:200,m:250,l:350},
+  build:  {s:250, m:300, l:400},
+  trash:  {s:200, m:250, l:350},
+  other:  {s:200, m:250, l:350}
+};
+const SERVICE_KEYS=['move','cargo','furniture','build','trash','other'];
+
+const SUBLABELS={
+  move:   {0:'за переезд по городу',   city:'за переезд по городу',   inter:'за переезд {km} км'},
+  cargo:  {0:'за перевозку по городу', city:'за перевозку по городу', inter:'за перевозку {km} км'},
+  furniture:{0:'за доставку по городу',city:'за доставку по городу',  inter:'за доставку {km} км'},
+  build:  {0:'за перевозку по городу', city:'за перевозку по городу', inter:'за перевозку {km} км'},
+  trash:  {0:'за вывоз по городу',     city:'за вывоз по городу',     inter:'за вывоз {km} км'},
+  other:  {0:'за перевозку',           city:'за перевозку по городу', inter:'за перевозку {km} км'}
+};
+
+/* ── DISTANCES ── */
+const D={
+  chisinau:{chisinau:0,balti:130,orhei:44,ungheni:107,cahul:155,soroca:165,comrat:92,drochia:152,edinet:188,hincesti:60,straseni:30,ialoveni:20,anenii:40,criuleni:36,nisporeni:70,floresti:135,rezina:90,telenesti:75,glodeni:140},
+  balti:{chisinau:130,balti:0,orhei:92,ungheni:90,cahul:270,soroca:62,comrat:205,drochia:38,edinet:80,hincesti:170,straseni:102,ialoveni:145,anenii:160,criuleni:155,nisporeni:120,floresti:28,rezina:90,telenesti:65,glodeni:45},
+  orhei:{chisinau:44,balti:92,orhei:0,ungheni:130,cahul:192,soroca:122,comrat:130,drochia:110,edinet:148,hincesti:100,straseni:30,ialoveni:58,anenii:72,criuleni:60,nisporeni:100,floresti:110,rezina:50,telenesti:35,glodeni:115}
+};
+function km(a,b){
+  if(a===b)return 0;
+  if(D[a]&&D[a][b]!==undefined)return D[a][b];
+  if(D[b]&&D[b][a]!==undefined)return D[b][a];
+  return Math.round(50+Math.random()*100);
+}
+
+const NAMES={chisinau:'Кишинёв',balti:'Бельцы',orhei:'Орхей',ungheni:'Унгень',cahul:'Кагул',soroca:'Сороки',comrat:'Комрат',drochia:'Дрокия',edinet:'Единец',hincesti:'Хынчешты',straseni:'Стрэшень',ialoveni:'Яловень',anenii:'Анений Ной',criuleni:'Криулень',nisporeni:'Ниспорень',floresti:'Флорешть',rezina:'Резина',telenesti:'Теленешты',glodeni:'Глодень'};
+
+/* ── PICK (single select in group) ── */
+function pick(el,gridId){
+  document.querySelectorAll('#'+gridId+' .opt-btn').forEach(b=>b.classList.remove('on'));
+  el.classList.add('on');
+  if(gridId==='serviceGrid') S.service=SERVICE_KEYS[Array.from(el.parentNode.children).indexOf(el)];
+  if(gridId==='truckGrid') S.truck=['s','m','l'][Array.from(el.parentNode.children).indexOf(el)];
+  recalc();
+}
+
+/* ── ROUTE ── */
+function updateRoute(){
+  const f=document.getElementById('cityFrom').value;
+  const t=document.getElementById('cityTo').value;
+  S.distKm=km(f,t);
+  const fn=NAMES[f]||f, tn=NAMES[t]||t;
+  const dt=document.getElementById('distText');
+  if(S.distKm===0){
+    dt.textContent='По городу '+fn;
+  } else {
+    const mins=Math.round(S.distKm/70*60);
+    dt.textContent=fn+' → '+tn+' · '+S.distKm+' км (~'+mins+' мин)';
+  }
+  recalc();
+}
+
+/* ── EXTRAS ── */
+function toggleExtra(el,price){
+  el.classList.toggle('on');
+  el.querySelector('.chk').textContent=el.classList.contains('on')?'✓':'';
+  if(el.classList.contains('on')) el.dataset.price=price;
+  else delete el.dataset.price;
+  S.hasExtras=document.querySelectorAll('.extra-item.on').length>0;
+  recalc();
+}
+
+/* ── RECALC ── */
+function recalc(){
+  const base=FROM[S.service][S.truck];
+  // For intercity, add rough km cost on top
+  let from=base;
+  if(S.distKm>50) from=Math.round(base+S.distKm*8);
+
+  // Sub-label
+  const svcLabels=SUBLABELS[S.service]||SUBLABELS.cargo;
+  let sub = S.distKm===0
+    ? svcLabels.city
+    : svcLabels.inter.replace('{km}',S.distKm+' км');
+
+  document.getElementById('pFrom').textContent=from.toLocaleString('ru-RU');
+  document.getElementById('pFromSub').textContent=sub;
+  document.getElementById('bctaPrice').textContent='де ла '+from.toLocaleString('ru-RU')+' лей';
+}
+
+/* ── SCROLL TO FORM ── */
+function scrollToForm(){
+  document.getElementById('formWrap').scrollIntoView({behavior:'smooth',block:'start'});
+  setTimeout(()=>document.getElementById('fName').focus(),400);
+}
+
+/* ── SUBMIT ── */
+function doSubmit(){
+  const name=document.getElementById('fName');
+  const phone=document.getElementById('fPhone');
+  let ok=true;
+  name.classList.remove('err'); phone.classList.remove('err');
+  if(!name.value.trim()){name.classList.add('err');name.focus();ok=false;}
+  if(!phone.value.trim()||phone.value.replace(/\D/g,'').length<7){
+    phone.classList.add('err');
+    if(ok)phone.focus();
+    ok=false;
+  }
+  if(!ok)return;
+
+  const lead={
+    name:name.value.trim(),
+    phone:phone.value.trim(),
+    addr:document.getElementById('fAddr').value.trim(),
+    from:document.getElementById('cityFrom').value,
+    to:document.getElementById('cityTo').value,
+    service:S.service,
+    truck:S.truck,
+    distKm:S.distKm,
+    priceFrom:document.getElementById('pFrom').textContent+' лей',
+    ts:new Date().toISOString()
+  };
+  // ── TELEGRAM NOTIFICATION ──
+  const TG_TOKEN = '8716780190:AAHQ6UgMBB7XQeOOlqMR0n-UA_gJn_EA0rg';
+  const TG_CHAT  = '885045916';
+
+  const serviceLabels = {
+    move:'Переезд квартиры/офиса', cargo:'Грузоперевозки',
+    furniture:'Перевезти мебель', build:'Стройматериалы',
+    trash:'Вывоз мусора', other:'Другое'
+  };
+  const truckLabels = {s:'Малый (до 1.5т · 13м³)', m:'Средний (до 2.5т · 20м³)', l:'Большой (до 5т · 36м³)'};
+  const cityNames = {chisinau:'Кишинёв',balti:'Бельцы',orhei:'Орхей',ungheni:'Унгень',cahul:'Кагул',soroca:'Сороки',comrat:'Комрат',drochia:'Дрокия',edinet:'Единец',hincesti:'Хынчешты',straseni:'Стрэшень',ialoveni:'Яловень',anenii:'Анений Ной',criuleni:'Криулень',nisporeni:'Ниспорень',floresti:'Флорешть',rezina:'Резина',telenesti:'Теленешты',glodeni:'Глодень'};
+
+  const extras = [];
+  document.querySelectorAll('.extra-item.on .extra-name').forEach(el => extras.push(el.textContent.trim()));
+
+  const fromCity = cityNames[lead.from] || lead.from;
+  const toCity   = cityNames[lead.to]   || lead.to;
+  const route    = lead.distKm === 0 ? '📍 По городу ' + fromCity : '📍 ' + fromCity + ' → ' + toCity + ' (' + lead.distKm + ' км)';
+
+  const msg =
+`🚛 *НОВАЯ ЗАЯВКА — Грузоперевозки*
+
+👤 *Имя:* ${lead.name}
+📞 *Телефон:* ${lead.phone}
+${lead.addr ? '🏠 *Адрес:* ' + lead.addr + '\n' : ''}
+📦 *Услуга:* ${serviceLabels[lead.service] || lead.service}
+🚚 *Машина:* ${truckLabels[lead.truck] || lead.truck}
+${route}
+${extras.length ? '➕ *Доп. услуги:* ' + extras.join(', ') + '\n' : ''}
+💰 *Ориентировочно от:* ${lead.priceFrom}
+
+🕐 ${new Date().toLocaleString('ru-RU', {timeZone:'Europe/Chisinau'})}`;
+
+  fetch('https://api.telegram.org/bot' + TG_TOKEN + '/sendMessage', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      chat_id: TG_CHAT,
+      text: msg,
+      parse_mode: 'Markdown'
+    })
+  }).catch(()=>{}); // silent fail — не блокирует UI
+
+  document.getElementById('formWrap').style.display='none';
+  document.getElementById('orCallTxt').style.display='none';
+  document.getElementById('bigCallBtn').style.display='none';
+  document.getElementById('successBlock').classList.add('show');
+  document.body.classList.add('hide-cta');
+  document.getElementById('successBlock').scrollIntoView({behavior:'smooth',block:'center'});
+}
+
+/* ── INIT ── */
+recalc();
+updateRoute();
+
+/* ── SMART AVAILABILITY ──
+   Logica:
+   - Dimineața (08:00–12:00): mereu 2 mașini
+   - După-amiaza (12:00–18:00): alternează la fiecare 30 min între 2 și 1
+   - Seara (18:00–21:00): mereu 1 mașină (urgență)
+   - Noaptea (21:00–08:00): afișăm "mâine" cu 2 mașini
+   - Se bazează pe ora locală Chișinău (UTC+2/+3)
+── */
+function updateAvailability() {
+  const now   = new Date();
+  const hour  = now.getHours();
+  const min   = now.getMinutes();
+
+  // Bloc de 30 min: 0=prima jumătate, 1=a doua jumătate a orei
+  const half  = min < 30 ? 0 : 1;
+
+  // Seed pe zi (ca să fie consistent pe toată ziua pentru același utilizator)
+  const daySeed = now.getFullYear() * 10000 + (now.getMonth()+1) * 100 + now.getDate();
+
+  let count, title, sub, alertCount, alertText;
+
+  if (hour < 8 || hour >= 21) {
+    // Noapte — promovăm ziua următoare
+    count      = 2;
+    title      = 'Disponibile mâine';
+    sub        = 'Rezervați acum · Lucrăm 08:00–21:00';
+    alertCount = '2 mașini disponibile';
+    alertText  = 'mâine — rezervați acum!';
+
+  } else if (hour >= 8 && hour < 12) {
+    // Dimineață — întotdeauna 2
+    count      = 2;
+    title      = 'Машины свободны сегодня';
+    sub        = 'Выезд за 30–60 минут · Работаем 08:00–21:00';
+    alertCount = '2 машины';
+    alertText  = 'на сегодня — бронируйте сейчас!';
+
+  } else if (hour >= 12 && hour < 18) {
+    // Zi — alternează la fiecare 30 min
+    // folosim (ora * 2 + half) ca index, amestecat cu daySeed
+    const slot  = (hour * 2 + half + daySeed) % 3;
+    // slot 0,1 → 2 mașini  |  slot 2 → 1 mașină
+    if (slot < 2) {
+      count      = 2;
+      title      = 'Машины свободны сегодня';
+      sub        = 'Выезд за 30–60 минут · Успейте забронировать';
+      alertCount = '2 машины';
+      alertText  = 'на сегодня — бронируйте сейчас!';
+    } else {
+      count      = 1;
+      title      = 'Осталась 1 машина!';
+      sub        = 'Последняя свободная на сегодня · Торопитесь';
+      alertCount = '1 машина';
+      alertText  = 'осталась на сегодня — успейте!';
+    }
+
+  } else {
+    // Seară 18–21 — 1 mașină, urgență
+    count      = 1;
+    title      = 'Осталась 1 машина!';
+    sub        = 'Последняя на сегодня · Выезд в течение часа';
+    alertCount = '1 машина';
+    alertText  = 'осталась — звоните сейчас!';
+  }
+
+  // Actualizăm DOM
+  document.getElementById('availNum').textContent   = count;
+  document.getElementById('availTitle').textContent = title;
+  document.getElementById('availSub').textContent   = sub;
+  document.getElementById('alertCount').textContent = alertCount;
+  document.getElementById('alertText').textContent  = alertText;
+
+  // Culoare: 1 mașină = mai urgent (pulsează mai rapid)
+  const numEl = document.getElementById('availNum');
+  if (count === 1) {
+    numEl.style.color = 'var(--red)';
+    numEl.style.animation = 'bl .8s step-end infinite';
+  } else {
+    numEl.style.color = 'var(--red)';
+    numEl.style.animation = '';
+  }
+}
+
+// Rulează imediat și apoi la fiecare minut
+updateAvailability();
+setInterval(updateAvailability, 60 * 1000);
+</script>
+</body>
+</html>
