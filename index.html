@@ -525,23 +525,36 @@ function recalc(){
   const truckBtn = document.querySelector('#truckGrid .opt-btn.on');
   const hourlyRate = parseInt(truckBtn?.dataset.hourly) || 350;
   
-  let from;
+  let basePrice;
   let sub;
   const svcLabels = SUBLABELS[S.service] || SUBLABELS.cargo;
   
   if(S.distKm === 0){
     // In-city: hourly rate (350/400/600 MDL per hour based on truck)
-    from = hourlyRate;
+    basePrice = hourlyRate;
     sub = svcLabels.city + ' · ' + hourlyRate + ' лей/час';
   } else {
     // Intercity: 10 MDL per km
-    from = S.distKm * 10;
+    basePrice = S.distKm * 10;
     sub = svcLabels.inter.replace('{km}', S.distKm + ' км') + ' · 10 лей/км';
   }
 
-  document.getElementById('pFrom').textContent = from.toLocaleString('ru-RU');
+  // Add extras cost
+  let extrasTotal = 0;
+  document.querySelectorAll('.extra-item.on').forEach(el => {
+    extrasTotal += parseInt(el.dataset.price) || 0;
+  });
+  
+  const totalPrice = basePrice + extrasTotal;
+  
+  // Update sub text if extras selected
+  if(extrasTotal > 0){
+    sub += ' + ' + extrasTotal + ' лей доп. услуги';
+  }
+
+  document.getElementById('pFrom').textContent = totalPrice.toLocaleString('ru-RU');
   document.getElementById('pFromSub').textContent = sub;
-  document.getElementById('bctaPrice').textContent = 'de la ' + from.toLocaleString('ru-RU') + ' lei';
+  document.getElementById('bctaPrice').textContent = 'de la ' + totalPrice.toLocaleString('ru-RU') + ' lei';
 }
 
 /* ── SCROLL TO FORM ── */
@@ -585,7 +598,7 @@ function doSubmit(){
     furniture:'Перевезти мебель', build:'Стройматериалы',
     trash:'Вывоз мусора', other:'Другое'
   };
-  const truckLabels = {s:'Малый (до 1.5т · 13м³)', m:'Средний (до 2.5т · 20м³)', l:'Большой (до 5т · 36м³)'};
+  const truckLabels = {s:'Малый (до 1.5т · 13м³)', m:'��редний (до 2.5т · 20м³)', l:'Большой (до 5т · 36м³)'};
   const cityNames = {chisinau:'Кишинёв',balti:'Бельцы',orhei:'Орхей',ungheni:'Унгень',cahul:'Кагул',soroca:'Сороки',comrat:'Комрат',drochia:'Дрокия',edinet:'Единец',hincesti:'Хынчешты',straseni:'Стрэшень',ialoveni:'Яловень',anenii:'Анений Ной',criuleni:'Криулень',nisporeni:'Ниспорень',floresti:'Флорешть',rezina:'Резина',telenesti:'Теленешты',glodeni:'Глодень'};
 
   const extras = [];
