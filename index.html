@@ -269,20 +269,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
     <div class="card-body">
       <div class="opt-grid" id="truckGrid" style="grid-template-columns:1fr 1fr 1fr">
-        <button class="opt-btn" data-hourly="350" data-mult="1" onclick="pick(this,'truckGrid')">
+        <button class="opt-btn on" data-hourly="350" onclick="pick(this,'truckGrid')">
           <span class="opt-icon">🚐</span>
           <span class="opt-label">До 1.5 т</span>
-          <span class="opt-sub">13 м³</span>
+          <span class="opt-sub">350 лей/час</span>
         </button>
-        <button class="opt-btn on" data-hourly="400" data-mult="1.15" onclick="pick(this,'truckGrid')">
+        <button class="opt-btn" data-hourly="400" onclick="pick(this,'truckGrid')">
           <span class="opt-icon">🚚</span>
           <span class="opt-label">До 2.5 т</span>
-          <span class="opt-sub">20 м³</span>
+          <span class="opt-sub">400 лей/час</span>
         </button>
-        <button class="opt-btn" data-hourly="600" data-mult="1.55" onclick="pick(this,'truckGrid')">
+        <button class="opt-btn" data-hourly="600" onclick="pick(this,'truckGrid')">
           <span class="opt-icon">🛻</span>
           <span class="opt-label">До 5 т</span>
-          <span class="opt-sub">36 м³</span>
+          <span class="opt-sub">600 лей/час</span>
         </button>
       </div>
     </div>
@@ -446,7 +446,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <script>
 /* ── STATE ── */
-const S={service:'move',truck:'m',distKm:0,hasExtras:false};
+const S={service:'move',truck:'s',distKm:0,hasExtras:false};
 
 /* ── PRICE RANGES from real price table ── */
 // Base "от X лей" per service type × truck size
@@ -521,20 +521,40 @@ function toggleExtra(el,price){
 
 /* ── RECALC ── */
 function recalc(){
-  const base=FROM[S.service][S.truck];
-  // For intercity, add rough km cost on top
-  let from=base;
-  if(S.distKm>50) from=Math.round(base+S.distKm*8);
+  // Get hourly rate from selected truck button
+  const truckBtn = document.querySelector('#truckGrid .opt-btn.on');
+  const hourlyRate = parseInt(truckBtn?.dataset.hourly) || 350;
+  
+  let basePrice;
+  let sub;
+  const svcLabels = SUBLABELS[S.service] || SUBLABELS.cargo;
+  
+  if(S.distKm === 0){
+    // In-city: hourly rate (350/400/600 MDL per hour based on truck)
+    basePrice = hourlyRate;
+    sub = svcLabels.city + ' · ' + hourlyRate + ' лей/час';
+  } else {
+    // Intercity: 10 MDL per km
+    basePrice = S.distKm * 10;
+    sub = svcLabels.inter.replace('{km}', S.distKm + ' км') + ' · 10 лей/км';
+  }
 
-  // Sub-label
-  const svcLabels=SUBLABELS[S.service]||SUBLABELS.cargo;
-  let sub = S.distKm===0
-    ? svcLabels.city
-    : svcLabels.inter.replace('{km}',S.distKm+' км');
+  // Add extras cost
+  let extrasTotal = 0;
+  document.querySelectorAll('.extra-item.on').forEach(el => {
+    extrasTotal += parseInt(el.dataset.price) || 0;
+  });
+  
+  const totalPrice = basePrice + extrasTotal;
+  
+  // Update sub text if extras selected
+  if(extrasTotal > 0){
+    sub += ' + ' + extrasTotal + ' лей доп. услуги';
+  }
 
-  document.getElementById('pFrom').textContent=from.toLocaleString('ru-RU');
-  document.getElementById('pFromSub').textContent=sub;
-  document.getElementById('bctaPrice').textContent='де ла '+from.toLocaleString('ru-RU')+' лей';
+  document.getElementById('pFrom').textContent = totalPrice.toLocaleString('ru-RU');
+  document.getElementById('pFromSub').textContent = sub;
+  document.getElementById('bctaPrice').textContent = 'de la ' + totalPrice.toLocaleString('ru-RU') + ' lei';
 }
 
 /* ── SCROLL TO FORM ── */
@@ -578,7 +598,7 @@ function doSubmit(){
     furniture:'Перевезти мебель', build:'Стройматериалы',
     trash:'Вывоз мусора', other:'Другое'
   };
-  const truckLabels = {s:'Малый (до 1.5т · 13м³)', m:'Средний (до 2.5т · 20м³)', l:'Большой (до 5т · 36м³)'};
+  const truckLabels = {s:'Малый (до 1.5т · 13м³)', m:'��редний (до 2.5т · 20м³)', l:'Большой (до 5т · 36м³)'};
   const cityNames = {chisinau:'Кишинёв',balti:'Бельцы',orhei:'Орхей',ungheni:'Унгень',cahul:'Кагул',soroca:'Сороки',comrat:'Комрат',drochia:'Дрокия',edinet:'Единец',hincesti:'Хынчешты',straseni:'Стрэшень',ialoveni:'Яловень',anenii:'Анений Ной',criuleni:'Криулень',nisporeni:'Ниспорень',floresti:'Флорешть',rezina:'Резина',telenesti:'Теленешты',glodeni:'Глодень'};
 
   const extras = [];
