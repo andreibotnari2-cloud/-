@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="theme-color" content="#1A7A8C">
+<title>О компании — Relocare.MD</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@700;900&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --primary:#1A7A8C;
+  --primary2:#156773;
+  --accent:#FF6B35;
+  --ink:#1A1A2E;
+  --ink2:#2D2D44;
+  --ink3:#6B6B80;
+  --bg:#F5F9FA;
+  --white:#FFFFFF;
+  --border:#D8E8EB;
+  --r:14px;
+  --rs:9px;
+}
+html,body{height:100%;overflow-x:hidden}
+body{font-family:'Manrope',sans-serif;background:var(--bg);color:var(--ink);font-size:15px;line-height:1.5}
+
+/* HEADER */
+.hdr{background:var(--ink);display:flex;align-items:center;justify-content:space-between;padding:0 16px;height:54px;position:sticky;top:0;z-index:100}
+.logo{font-family:'Exo 2',sans-serif;font-size:17px;font-weight:900;color:#fff;text-decoration:none;letter-spacing:-.3px}
+.logo em{color:var(--primary);font-style:normal}
+.hdr-phone{display:flex;align-items:center;gap:6px;background:var(--primary);border-radius:8px;padding:7px 12px;color:#fff;text-decoration:none;font-family:'Exo 2',sans-serif;font-size:14px;font-weight:900;letter-spacing:-.2px;white-space:nowrap}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,var(--ink) 0%,#2a2a42 100%);padding:48px 16px 40px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse at bottom,rgba(26,122,140,.2) 0%,transparent 70%);pointer-events:none}
+.hero-title{font-family:'Exo 2',sans-serif;font-size:30px;font-weight:900;color:#fff;letter-spacing:-.5px;position:relative;z-index:1;line-height:1.15}
+.hero-title em{color:var(--primary);font-style:normal}
+.hero-sub{font-size:14px;color:rgba(255,255,255,.6);margin-top:10px;position:relative;z-index:1}
+
+/* PAGE */
+.page{max-width:480px;margin:0 auto;padding:28px 16px 80px}
+
+/* STATS */
+.stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:28px}
+.stat-card{background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:16px 10px;text-align:center}
+.stat-num{font-family:'Exo 2',sans-serif;font-size:26px;font-weight:900;color:var(--primary);line-height:1}
+.stat-label{font-size:11px;color:var(--ink3);margin-top:4px;font-weight:600}
+
+/* SECTION */
+.stitle{font-family:'Exo 2',sans-serif;font-size:20px;font-weight:900;letter-spacing:-.4px;margin-bottom:12px;line-height:1.2}
+.stitle em{font-style:normal;color:var(--primary)}
+
+/* CARD */
+.card{background:var(--white);border:1px solid var(--border);border-radius:var(--r);margin-bottom:14px;overflow:hidden}
+.card-body{padding:16px}
+
+/* VALUES */
+.value-item{display:flex;align-items:flex-start;gap:12px;padding:12px 0;border-bottom:1px solid var(--border)}
+.value-item:last-child{border-bottom:none;padding-bottom:0}
+.value-icon{font-size:26px;min-width:36px;text-align:center}
+.value-title{font-family:'Exo 2',sans-serif;font-size:14px;font-weight:800;color:var(--ink);margin-bottom:2px}
+.value-desc{font-size:12px;color:var(--ink3);line-height:1.5}
+
+/* TEAM */
+.team-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:28px}
+.team-card{background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:16px;text-align:center}
+.team-avatar{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--primary),var(--primary2));display:flex;align-items:center;justify-content:center;font-size:22px;margin:0 auto 10px}
+.team-name{font-family:'Exo 2',sans-serif;font-size:13px;font-weight:800;color:var(--ink)}
+.team-role{font-size:11px;color:var(--ink3);margin-top:2px}
+
+/* CTA */
+.cta{background:var(--primary);border-radius:var(--r);padding:20px 16px;text-align:center;margin-bottom:14px}
+.cta-title{font-family:'Exo 2',sans-serif;font-size:18px;font-weight:900;color:#fff;margin-bottom:8px}
+.cta-sub{font-size:12px;color:rgba(255,255,255,.8);margin-bottom:16px}
+.cta-btn{display:inline-block;background:#fff;color:var(--primary);font-family:'Exo 2',sans-serif;font-size:15px;font-weight:900;padding:12px 28px;border-radius:var(--rs);text-decoration:none;letter-spacing:-.2px}
+</style>
+</head>
+<body>
+
+<header class="hdr">
+  <a href="index.html" class="logo">Relocare<em>.MD</em></a>
+  <a href="tel:+37360000000" class="hdr-phone">📞 +373 600 000 00</a>
+</header>
+
+<div class="hero">
+  <h1 class="hero-title">О <em>компании</em></h1>
+  <p class="hero-sub">Грузоперевозки по Кишинёву и Молдове с 2015 года</p>
+</div>
+
+<div class="page">
+
+  <!-- STATS -->
+  <div class="stats">
+    <div class="stat-card">
+      <div class="stat-num">9+</div>
+      <div class="stat-label">лет на рынке</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">4K+</div>
+      <div class="stat-label">переездов</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">98%</div>
+      <div class="stat-label">довольных клиентов</div>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <h2 class="stitle">Кто мы <em>такие</em></h2>
+  <div class="card" style="margin-bottom:24px">
+    <div class="card-body">
+      <p style="font-size:13px;color:#444;line-height:1.7;margin-bottom:10px">
+        <strong>Relocare.MD</strong> — это команда профессионалов, которая помогает жителям Кишинёва и всей Молдовы переезжать быстро, безопасно и без лишних хлопот.
+      </p>
+      <p style="font-size:13px;color:#444;line-height:1.7">
+        Мы работаем с 2015 года и за это время выполнили тысячи переездов — от небольших квартир до крупных офисов. Каждый клиент для нас важен, и мы подходим к каждому заказу индивидуально.
+      </p>
+    </div>
+  </div>
+
+  <!-- VALUES -->
+  <h2 class="stitle" style="margin-bottom:14px">Наши <em>ценности</em></h2>
+  <div class="card" style="margin-bottom:24px">
+    <div class="card-body">
+      <div class="value-item">
+        <div class="value-icon">⚡</div>
+        <div>
+          <div class="value-title">Скорость</div>
+          <div class="value-desc">Приезжаем вовремя. Никаких задержек и переносов без предупреждения.</div>
+        </div>
+      </div>
+      <div class="value-item">
+        <div class="value-icon">🛡️</div>
+        <div>
+          <div class="value-title">Надёжность</div>
+          <div class="value-desc">Ваши вещи в безопасности — упакуем, погрузим и доставим без повреждений.</div>
+        </div>
+      </div>
+      <div class="value-item">
+        <div class="value-icon">💰</div>
+        <div>
+          <div class="value-title">Честные цены</div>
+          <div class="value-desc">Цена фиксируется заранее. Никаких скрытых платежей после выполнения заказа.</div>
+        </div>
+      </div>
+      <div class="value-item">
+        <div class="value-icon">🤝</div>
+        <div>
+          <div class="value-title">Забота о клиенте</div>
+          <div class="value-desc">На связи 24/7. Ответим на все вопросы до, во время и после переезда.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TEAM -->
+  <h2 class="stitle" style="margin-bottom:14px">Наша <em>команда</em></h2>
+  <div class="team-grid">
+    <div class="team-card">
+      <div class="team-avatar">👨‍💼</div>
+      <div class="team-name">Андрей Б.</div>
+      <div class="team-role">Основатель</div>
+    </div>
+    <div class="team-card">
+      <div class="team-avatar">👷</div>
+      <div class="team-name">Виктор М.</div>
+      <div class="team-role">Старший грузчик</div>
+    </div>
+    <div class="team-card">
+      <div class="team-avatar">🚛</div>
+      <div class="team-name">Дмитрий Л.</div>
+      <div class="team-role">Водитель-эксперт</div>
+    </div>
+    <div class="team-card">
+      <div class="team-avatar">📞</div>
+      <div class="team-name">Елена К.</div>
+      <div class="team-role">Менеджер</div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta">
+    <div class="cta-title">Готовы к переезду?</div>
+    <div class="cta-sub">Рассчитайте стоимость за 2 минуты</div>
+    <a href="index.html" class="cta-btn">Рассчитать цену →</a>
+  </div>
+
+</div>
+</body>
+</html>
